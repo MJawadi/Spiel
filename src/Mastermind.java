@@ -35,7 +35,6 @@ public class Mastermind {
 	}
 	
 	
-	
 	public static void getRandom(int a, int b, int c, int d) {
 		
 		Random rand = new Random();
