@@ -59,6 +59,8 @@ public class Mastermind {
 	
 	
 	
+	
+	
 	public static ArrayList<Integer> getRandom(ArrayList<Integer> randList) {
 		
 		Random rand = new Random();
@@ -72,6 +74,8 @@ public class Mastermind {
 		}
 		return randList;
 	}
+	
+	
 	
 	
 	
