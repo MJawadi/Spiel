@@ -1,54 +1,102 @@
 import java.util.*;
 public class Mastermind {
+	
+	public static Scanner scan = new Scanner(System.in);
 
 	public static void main(String[] args) {
 		
+		ArrayList<Integer> randomList = new ArrayList<Integer>(4);
+		ArrayList<Integer> inputNumbers = new ArrayList<Integer>(4);
+		boolean result = true;
 		
-		Scanner scan = new Scanner(System.in);
-		int zahl1 = 0, zahl2 = 0, zahl3 = 0, zahl4 = 0;
-		getRandom(zahl1, zahl2, zahl3, zahl4);
-		System.out.print(zahl1+zahl2+zahl3+zahl4);
-
+		
+		for(int x=0; x<10; x++) {
+			if(x==0) {
+				getRandom(randomList);
+			}
+			inputNumbers.clear();
+			getNumber(inputNumbers);
+			
+			if(result == checking(randomList, inputNumbers, result)) {
+				System.out.print("Wollen Sie nochmal spielen?: ");
+				if(scan.nextLine().equals("y") || scan.nextLine().equals("Y")) {
+					x=0;
+				}else {
+					if(scan.nextLine().equals("n") || scan.nextLine().equals("N")) {
+						break;
+					}
+				}
+			}
+		}
 	}
 	
 	
-	public static void getNumber(int a, int b, int c, int d) {
+	public static ArrayList<Integer> getNumber(ArrayList<Integer> inNum) {
 		
-		Scanner scan = new Scanner(System.in);
+		
 		for(int i=1; i<5; i++) {
 			System.out.print("Zahl "+i+": (0/9): ");
-			int inNum = scan.nextInt();
-			if(inNum<10) {
-				switch(i) {
-				case 1: a=inNum;
-				case 2: b=inNum;
-				case 3: c=inNum;
-				case 4: d=inNum;
+			int row = Mastermind.scan.nextInt();
+			if(row<10) {
+				if(i>1) {
+					if(inNum.contains(row)) {
+						System.out.println("Error!! Sie haben diese Nummer schon genohmen!!");
+						i--;
+					}else {
+						inNum.add(row);
+					}
+				}else {
+					inNum.add(row);
 				}
 			}else {
 				System.out.println("Error!!! Die Anzahl ist zu groﬂ!!! noch mal versuchen.");
 				i--;
 			}
+			System.out.println("\nIhre Zahlen: "+inNum);
 		}
-		scan.close();
-		
+		return inNum;
 	}
 	
 	
-	public static void getRandom(int a, int b, int c, int d) {
+	
+	public static ArrayList<Integer> getRandom(ArrayList<Integer> randList) {
 		
 		Random rand = new Random();
-		for(int j=1; j<5; j++) {
-			switch(j) {
-			case 1: a = rand.nextInt(10);
-			case 2: b = rand.nextInt(10);
-			case 3: c = rand.nextInt(10);
-			case 4:	d = rand.nextInt(10);
-			}
-			if(a==b || a==c || a==d || b==d || c==d) {
-				j=1;
+		for(int i=0; i<4; i++) {
+			int row = rand.nextInt(10);
+			if(randList.contains(row)) {
+				i--;
+			}else {
+				randList.add(row);
 			}
 		}
+		return randList;
+	}
+	
+	
+	
+	
+	public static boolean checking(ArrayList<Integer> randNum, ArrayList<Integer> userNum, boolean set) {
+		
+		boolean guese = false;
+		set = guese;
+		int rightNumbers = 0;
+		for(int s=0; s<randNum.size(); s++) {
+			if(randNum.get(s).equals(userNum.get(s))) {
+				System.out.println("Direkter Treffer!!");
+			}
+			if(randNum.contains(userNum.get(s))) {
+				System.out.println("Indirekt Treffer!!");
+			}
+			if(randNum.get(s).equals(userNum.get(s))) {
+				rightNumbers++;
+				if(rightNumbers==4) {
+					System.out.println("\n\n\nGl¸ckwunsch! Sie haben gewonnen!!!");
+					set = true;
+				}
+			}
+		}
+		return set;
 	}
 
 }
