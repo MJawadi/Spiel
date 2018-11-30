@@ -9,7 +9,7 @@ public class Schiffe_versenken {
 		
 		while(true) {
 			
-			System.out.print("1 . Start game.\n2 . Quit the game.\n-->: ");
+			System.out.print("1 . Start game.\n2 . Quit the game.\nNumber-->: ");
 			int choose = scan.nextInt();
 			if(choose==2) {
 				scan.close();
@@ -17,7 +17,7 @@ public class Schiffe_versenken {
 			}
 			if(choose==1) {
 				int dif = 0;
-				System.out.print("Set the difficulty \n1 . Easy \n2 . Normal \n3 . hard \n4 . Extreme \n-->: ");
+				System.out.print("Set the difficulty \n1 . Easy \n2 . Normal \n3 . hard \n4 . Extreme \nNumber-->: ");
 				choose = scan.nextInt();
 				if(choose<1 || choose>4) {
 					System.out.println("Error!! choose right number!!");
@@ -50,6 +50,7 @@ public class Schiffe_versenken {
 					int count= 0;
 					int[][] coordinates = new int[6][6];
 					int[][] enemyCoordinates = new int[6][6];
+					print(enemyShips, myShips, coordinates, enemyCoordinates);
 					while(true) {
 						count++;
 						if(count!=10) {
@@ -59,6 +60,7 @@ public class Schiffe_versenken {
 								myShots++;
 								if(myShots == win) {
 									System.out.println("You have won!!!");
+									print(enemyShips, myShips, coordinates, enemyCoordinates);
 									break;
 								}
 							}
@@ -68,6 +70,7 @@ public class Schiffe_versenken {
 								enemyShot++;
 								if(enemyShot == win) {
 									System.out.println("Enemy won!! You lost!!");
+									print(enemyShips, myShips, coordinates, enemyCoordinates);
 									break;
 								}
 							}
@@ -140,7 +143,7 @@ public class Schiffe_versenken {
 					if(myShots[x][y]==1) {
 						System.out.print("   "+"F");
 					}else {
-						System.out.print("   "+"0");
+						System.out.print("   "+".");
 					}
 				}
 			}
@@ -156,7 +159,7 @@ public class Schiffe_versenken {
 						if(myList[x][j]==1) {
 							System.out.print("   "+"S");
 						}else {
-							System.out.print("   "+"0");
+							System.out.print("   "+".");
 						}
 					}
 				}

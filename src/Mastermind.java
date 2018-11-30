@@ -35,7 +35,7 @@ public class Mastermind {
 		
 		
 		for(int i=1; i<5; i++) {
-			System.out.print("Zahl "+i+": (0/9): ");
+			System.out.print("\nZahl "+i+": (0/9): ");
 			int row = Mastermind.scan.nextInt();
 			if(row<10) {
 				if(i>1) {
@@ -86,12 +86,15 @@ public class Mastermind {
 		set = guese;
 		int rightNumbers = 0;
 		for(int s=0; s<randNum.size(); s++) {
+			System.out.println("\n "+(s+1)+" Zahl: ");
 			if(randNum.get(s).equals(userNum.get(s))) {
-				System.out.println("Direkter Treffer!!");
+				System.out.print("(Direkter Treffer)");
+			}else {
+				if(randNum.contains(userNum.get(s))) {
+					System.out.print("(Indirekt Treffer)");
+				}
 			}
-			if(randNum.contains(userNum.get(s))) {
-				System.out.println("Indirekt Treffer!!");
-			}
+			
 			if(randNum.get(s).equals(userNum.get(s))) {
 				rightNumbers++;
 				if(rightNumbers==4) {
@@ -99,6 +102,7 @@ public class Mastermind {
 					set = true;
 				}
 			}
+			System.out.print("\n");
 		}
 		return set;
 	}
