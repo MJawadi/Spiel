@@ -19,14 +19,14 @@ public class Othello {
 		table[3][4]=1;
 		table[2][4]=2;
 		table[4][2]=1;
-		table[2][2]=2;
+		table[3][2]=2;
 		//table[5][4]=2;
 		//table[3][2]=2;
 		
 		while(true) {
 			
-			int[][] playerInput2 = new int [8][8];
-			int[][] playerInput1 = new int [8][8];
+			int[][] playerInput2 = new int[8][8];
+			int[][] playerInput1 = new int[8][8];
 			
 			checkPosiblePlaces(table, player2);
 			print(table);
@@ -55,8 +55,7 @@ public class Othello {
 	}
 	
 	
-	
-	public static int[][] getInput(int[][] entery, int player){
+	private static int[][] getInput(int[][] entery, int player){
 		
 		
 		System.out.print("A-H-->: ");
@@ -101,12 +100,7 @@ public class Othello {
 	
 	
 	
-	
-	
-	public static int[][] rules(int[][] cells, int[][] playerIn, int player){
-		
-		
-
+	private static int[][] rules(int[][] cells, int[][] playerIn, int player){
 		
 		int otherPlayer = 1;
 		if(player==1) {
@@ -118,255 +112,6 @@ public class Othello {
 				
 				if(playerIn[x][y]==player) {
 					
-					if((x>0 && x<7) && (y>0 && y<7)) {
-						
-						for(int a=x-1; a<x+2; a++) {
-							for(int b=y-1; b<y+2; b++) {
-								
-								if(cells[a][b]== otherPlayer) {
-										
-									if(a==x && b<y) {
-										int left = b;
-										int go = b;
-										boolean found =false;
-										while(go!=0) {
-											go--;
-											if(cells[a][go]==player) {
-												
-												for(int t=a-1; t<a+2; t++) {
-													for(int h=b-1; h<b+2; h++) {
-														if(cells[t][h]==otherPlayer) {
-															
-														}
-													}
-												}
-												found = true;
-												break;
-											}
-										}
-										while(found && left!=0) {
-											left--;
-											if(cells[a][left]==otherPlayer) {
-												cells[a][left]=player;
-											}else {
-												if(cells[a][left]==player) {
-													cells[x][y] = player;
-													cells[a][left]=player;
-													cells[a][b] = player;
-												}
-											}
-											
-										}
-										
-									}
-									
-									
-									if(a==x && b>y) {
-										int right = b;
-										int go = b;
-										boolean found =false;
-										while(go!=7) {
-											go++;
-											if(cells[a][go]==player) {
-												found = true;
-												break;
-											}
-										}
-										while(found && right!=7) {
-											right++;
-											if(cells[a][right]==otherPlayer) {
-												cells[a][right]=player;
-											}else {
-												if(cells[a][right]==player) {
-													cells[x][y] = player;
-													cells[a][right]=player;
-													cells[a][b] = player;
-												}
-											}
-											
-										}
-										
-									}
-									
-									
-									if(a<x && b==y) {
-										int up = a;
-										int go = a;
-										boolean found =false;
-										while(go!=0) {
-											go--;
-											if(cells[go][b]==player) {
-												found = true;
-												break;
-											}
-										}
-										while(found && up!=0) {
-											up--;
-											if(cells[up][b]==otherPlayer) {
-												cells[up][b]=player;
-											}else {
-												if(cells[up][b]==player) {
-													cells[x][y] = player;
-													cells[up][b]=player;
-													cells[a][b] = player;
-												}
-											}
-											
-										}
-										
-									}
-									
-									
-									if(a>x && b==y) {
-										int down = a;
-										int go = a;
-										boolean found =false;
-										while(go!=7) {
-											go++;
-											if(cells[go][b]==player) {
-												found = true;
-												break;
-											}
-										}
-										while(found && down!=7) {
-											down++;
-											if(cells[down][b]==otherPlayer) {
-												cells[down][b]=player;
-											}else {
-												if(cells[down][b]==player) {
-													cells[x][y] = player;
-													cells[down][b]=player;
-													cells[a][b] = player;
-												}
-											}
-											
-										}
-										
-									}
-									
-									
-									if(a<x && b<y) {
-										int up = a;
-										int left = b;
-										int goUp = a;
-										int goLeft = b;
-										boolean found =false;
-										while(goUp !=0 && goLeft !=0) {
-											goUp--;
-											goLeft--;
-											if(cells[goUp][goLeft]==player) {
-												found = true;
-												break;
-											}
-										}
-										while(up !=0 && left !=0 && found) {
-											up--;
-											left--;
-											if(cells[up][left]==otherPlayer) {
-												cells[up][left]=player;
-											}else {
-												if(cells[up][left]==player) {
-													cells[x][y] = player;
-													cells[up][left]=player;
-													cells[a][b] = player;
-												}
-											}
-										}
-									}
-									
-									if(a<x && b>y) {
-										int up = a;
-										int right = b;
-										int goUp = a;
-										int goRight = b;
-										boolean found =false;
-										while(goUp !=0 && goRight !=7) {
-											goUp--;
-											goRight++;
-											if(cells[goUp][goRight]==player) {
-												found = true;
-												break;
-											}
-										}
-										while(up !=0 && right !=0 && found) {
-											up--;
-											right--;
-											if(cells[up][right]==otherPlayer) {
-												cells[up][right]=player;
-											}else {
-												if(cells[up][right]==player) {
-													cells[x][y] = player;
-													cells[up][right]=player;
-													cells[a][b] = player;
-												}
-											}
-										}
-									}
-									
-									if(a>x && b<y) {
-										int down = a;
-										int left = b;
-										int goDown = a;
-										int goLeft = b;
-										boolean found =false;
-										while(goDown !=7 && goLeft !=0) {
-											goDown++;
-											goLeft--;
-											if(cells[goDown][goLeft]==player) {
-												found = true;
-												break;
-											}
-										}
-										while(down !=7 && left !=0 && found) {
-											down++;
-											left--;
-											if(cells[down][left]==otherPlayer) {
-												cells[down][left]=player;
-											}else {
-												if(cells[down][left]==player) {
-													cells[x][y] = player;
-													cells[down][left]=player;
-													cells[a][b] = player;
-												}
-											}
-										}
-									}
-									
-									if(a>x && b>y) {
-										int down = a;
-										int right = b;
-										int goDown = a;
-										int goRight = b;
-										boolean found =false;
-										while(goDown !=7 && goRight !=7) {
-											goDown++;
-											goRight++;
-											if(cells[goDown][goRight]==player) {
-												found = true;
-												break;
-											}
-										}
-										while(down !=7 && right !=7 && found) {
-											down++;
-											right++;
-											if(cells[down][right]==otherPlayer) {
-												cells[down][right]=player;
-											}else {
-												if(cells[down][right]==player) {
-													cells[x][y] = player;
-													cells[down][right]=player;
-													cells[a][b] = player;
-												}
-											}
-										}
-									}
-									
-									
-								}
-							}
-						}
-					}
-					
 					
 				}
 			}
@@ -375,11 +120,76 @@ public class Othello {
 		return cells;
 		
 	}
+
 	
 	
+	private static int[][] allDir(int[][] cells, int x, int y, int player, boolean found) {
+
+		
+		int otherPlayer = 1;
+		if(player==1) {
+			otherPlayer=2;
+		}
+		int up = x;
+		int down = x;
+		int right = y;
+		int left = y;
+		boolean go = true;
+		int count = 0;
+		while(up!=0 || down!=cells.length || right!=cells.length || left!=0) {
+			
+			if(up!=0) {
+				up--;
+			}
+			if(left!=0) {
+				left--;
+			}
+			if(right!=cells.length) {
+				right++;
+			}
+			if(down!=cells.length) {
+				down++;
+			}
+			
+			
+			if(cells[up][y]==player) {
+				found = true;
+				break;
+			}else {
+				if(cells[down][y]==player){
+					
+				}
+			}
+			if(cells[x][right]==otherPlayer) {
+				
+			}else {
+				if(cells[x][left]==otherPlayer) {
+					
+				}
+			}
+			if(cells[up][left]==otherPlayer) {
+				
+			}else {
+				if(cells[up][right]==otherPlayer) {
+					
+				}
+			}
+			if(cells[down][left]==otherPlayer) {
+				
+			}else {
+				if(cells[down][right]==otherPlayer) {
+					
+				}
+			}
+			
+		}
+		return cells;
+		
+	}
 	
-	
-	
+	//private static int[][] turnCells(int[][] cells, )
+
+
 	public static boolean checkForEmpty(boolean result, int[][] cells, int[][] player){
 		
 		
@@ -401,8 +211,6 @@ public class Othello {
 		
 		return result;
 	}
-	
-	
 	
 	
 	
@@ -519,8 +327,6 @@ public class Othello {
 		
 		return cells;
 	}
-	
-	
 	
 	
 	
